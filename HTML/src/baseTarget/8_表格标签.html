@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表格标签</title>
+</head>
+<body>
+
+<!--表格标签：
+    table：定义表格
+        cellpadding：边沿与内容之间的空白
+        cellspacing：单元格之间的空白（不设置看着像边框两条线）
+        align：对齐方式
+
+    tr：定义行
+    td：定义单元格
+    th：定义表头单元格（自动居中加粗）
+    -->
+    <table border="1" width="50%" cellpadding="0" cellspacing="0" bgcolor="#faebd7" align="center">
+        <tr>
+            <!--<td>编号</td>
+            <td>姓名</td>
+            <td>成绩</td>-->
+            <th>编号</th>
+            <th>姓名</th>
+            <th>成绩</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>小龙女</td>
+            <td>100</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>杨过</td>
+            <td>50</td>
+        </tr>
+    </table>
+
+
+
+
+    <table border="1" width="50%" cellpadding="0" cellspacing="0" bgcolor="#faebd7" align="center">
+        <!--表示表格头部份，增强可读性-->
+        <thead>
+            <!--表格标题-->
+            <caption>学生信息表</caption>
+
+            <tr>
+                <!-- <td>编号</td>
+                 <td>姓名</td>
+                 <td>成绩</td>-->
+                <th>编号</th>
+                <th>姓名</th>
+                <th>成绩</th>
+            </tr>
+        </thead>
+
+        <br><br><br>
+
+        <!--表示表格体部份，增强可读性-->
+        <tbody>
+            <tr bgcolor="#7fffd4" align="center">
+                <td>1</td>
+                <td>小龙女</td>
+                <td>100</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>杨过</td>
+                <td>50</td>
+            </tr>
+        </tbody>
+
+        <!--表示表格尾部份，增强可读性-->
+        <tfoot>
+            <tr>
+                <td>3</td>
+                <td>尹志平</td>
+                <td>10</td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <br><br><br>
+
+    <table border="1" width="50%" cellpadding="0" cellspacing="0" bgcolor="#faebd7" align="center">
+        <tr>
+            <!--
+                rowspan：合并行，参数是合并几行
+            -->
+            <th rowspan="2">编号</th>
+            <th>姓名</th>
+            <th>成绩</th>
+        </tr>
+
+        <tr>
+            <td>小龙女</td>
+            <td>100</td>
+        </tr>
+
+        <tr>
+            <!--
+                colspan：合并列，参数是合并几列
+            -->
+            <td>2</td>
+            <td colspan="2">杨过</td>
+        </tr>
+    </table>
+
+</body>
+</html>
