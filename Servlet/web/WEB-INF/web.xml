@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+
+    <servlet>
+        <servlet-name>test01</servlet-name>
+        <servlet-class>cn.yb.web.servlet.Servlet_ByXML</servlet-class>
+        <!--指定Servlet初始化时机（init）
+            1.第一次访问时初始化：
+                load-on-startup 值为负数（-1）
+            2.服务器启动时初始化：
+                值为0或整数（0-10）-->
+        <load-on-startup>-1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>test01</servlet-name>
+        <url-pattern>/test</url-pattern>
+    </servlet-mapping>
+</web-app>
