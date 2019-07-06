@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<!--<?xml-stylesheet type="text/css" href="a.css" ?>--><!--结合CSS-->
+<!--standalone：是否独立
+        yes：不依赖其他文件
+        no：依赖其他文件-->
+<users>
+    <user id='1'>
+        <name>张三</name>
+        <age>23</age>
+        <gender>male</gender>
+        <br/>
+    </user>
+
+    <user id='2'>
+        <name>lisi</name>
+        <age>24</age>
+        <gender>female</gender>
+
+        <code>
+            <![CDATA[
+                if(a < b && a != 0) {
+                    System.out.println("haha!")
+                }
+            ]]>
+        </code>
+
+    </user>
+</users>
