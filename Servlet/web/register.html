@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script>
+        /*
+            点击图片换一张
+            1.给超链接和图片绑定单击事件
+            2.重新设置图片src属性
+         */
+        var code;
+        window.onload = function () {
+            //获取图片对象
+            code = document.getElementById("checkCode");
+            //绑定单击事件
+            code.onclick = function () {
+                //加时间戳保证不重复
+                code.src = "/case/checkCodeServlet?" + new Date().getTime();
+            }
+        }
+
+        function change() {
+            code.src = "/case/checkCodeServlet?" + new Date().getTime();
+        }
+    </script>
+</head>
+<body>
+<img id="checkCode" src="/case/checkCodeServlet">
+<a onclick="change() " href="javascript:void(0)">看不清楚？点击换一张</a>
+</body>
+</html>

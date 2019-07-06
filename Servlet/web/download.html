@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--* 分析：
+        1. 超链接指向的资源如果能够被浏览器解析，则在浏览器中展示，如果不能解析，则弹出下载提示框。不满足需求
+        2. 任何资源都必须弹出下载提示框
+        3. 使用响应头设置资源的打开方式：
+		* content-disposition:attachment;filename=xxx-->
+<a href="img/2.jpg">2.jpg</a>
+<a href="img/1.avi">1.avi</a>
+<a href="img/九尾.jpg">九尾.jpg</a>
+<hr>
+<a href="/case/downLoadServlet?filename=2.jpg">2.jpg</a>
+<a href="/case/downLoadServlet?filename=1.avi">1.avi</a>
+<a href="/case/downLoadServlet?filename=九尾.jpg">九尾.jpg</a>
+</body>
+</html>
