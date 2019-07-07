@@ -11,8 +11,8 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Random;
 
-@WebServlet("/checkCodeServlet")
-public class checkCodeServlet extends HttpServlet {
+@WebServlet("/checkCode")
+public class checkCode extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int width = 120;

@@ -1,8 +1,8 @@
 package cn.yb.web.servlet;
 
-import cn.yb.dao.IUserDao;
-import cn.yb.dao.impl.UserDaoImpl;
 import cn.yb.model.User;
+import cn.yb.service.UserService;
+import cn.yb.service.impl.UserServiceImpl;
 import org.apache.commons.beanutils.BeanUtils;
 
 import javax.servlet.ServletException;
@@ -10,62 +10,71 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
 @WebServlet("/loginServlet")
 public class LoginServlet extends HttpServlet {
-    /**
-     * * 用户登录案例需求：
-     * 1.编写login.html登录页面
-     * username & password 两个输入框
-     * 2.使用Druid数据库连接池技术,操作mysql，day14数据库中user表
-     * 3.使用JdbcTemplate技术封装JDBC
-     * 4.登录成功跳转到SuccessServlet展示：登录成功！用户名,欢迎您
-     * 5.登录失败跳转到FailServlet展示：登录失败，用户名或密码错误
-     *
-     * @param request
-     * @param response
-     * @throws ServletException
-     * @throws IOException
-     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println(request);
+
         //1.设置编码
         request.setCharacterEncoding("utf-8");
-        /*//2.获取请求参数
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        //3.封装User对象
-        User loginUser = new User();
-        loginUser.setPassword(password);
-        loginUser.setUsername(username);*/
-        /**
-         * 获取所有请求参数
-         */
-        Map<String, String[]> parameterMap = request.getParameterMap();
-        User loginUser = new User();
-        //使用BeanUtils
+
+        //2.获取数据
+        //2.1获取用户填写验证码
+        String verifycode = request.getParameter("verifycode");
+
+        //3.验证码校验
+        HttpSession session = request.getSession();
+        String checkcode_server = (String) session.getAttribute("CHECKCODE_SERVER");
+        session.removeAttribute("CHECKCODE_SERVER");//确保验证码一次性
+        if(!checkcode_server.equalsIgnoreCase(verifycode)){
+            //验证码不正确
+            //提示信息
+            request.setAttribute("login_msg","验证码错误！");
+            //跳转登录页面
+            request.getRequestDispatcher("/login.jsp").forward(request,response);
+
+            return;
+        }
+
+        Map<String, String[]> map = request.getParameterMap();
+        //4.封装User对象
+        User user = new User();
         try {
-            BeanUtils.populate(loginUser,parameterMap);
+            BeanUtils.populate(user,map);
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {
             e.printStackTrace();
         }
 
-        //4.调用dao方法
-        IUserDao userDao = new UserDaoImpl();
-        User user = userDao.login(loginUser);
-        //5.判断
-        if (user == null) {
-            //登陆失败
-            request.getRequestDispatcher("/failServlet").forward(request, response);
-        } else {
-            //登陆成功
-            request.setAttribute("user", user);
-            request.getRequestDispatcher("/successServlet").forward(request, response);
+
+        //5.调用Service查询
+        UserService service = new UserServiceImpl();
+        User loginUser = service.login(user);
+        //6.判断是否登录成功
+        if(loginUser != null){
+            //登录成功
+            //将用户存入session
+            session.setAttribute("user",loginUser);
+            //跳转页面
+            response.sendRedirect(request.getContextPath()+"/index.jsp");
+        }else{
+            //登录失败
+            //提示信息
+            request.setAttribute("login_msg","用户名或密码错误！");
+            //跳转登录页面
+            request.getRequestDispatcher("/login.jsp").forward(request,response);
+
         }
+
+
+
+
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

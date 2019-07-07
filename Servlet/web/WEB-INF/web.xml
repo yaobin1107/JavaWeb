@@ -18,4 +18,14 @@
         <servlet-name>test01</servlet-name>
         <url-pattern>/test</url-pattern>
     </servlet-mapping>
+
+    <!--注册监听器-->
+    <listener>
+        <listener-class>cn.yb.web.listener.ContextLoadListener</listener-class>
+    </listener>
+    <!--指定初始化参数-->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/classes/druid.properties</param-value>
+    </context-param>
 </web-app>
