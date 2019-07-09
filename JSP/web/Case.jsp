@@ -18,8 +18,7 @@
     list.add(user3);
     request.setAttribute("list", list);
 %>
-<
-<table>
+<table border="1" width="500" align="center">
     <tr>
         <th>编号</th>
         <th>id</th>
